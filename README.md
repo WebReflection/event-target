@@ -86,3 +86,6 @@ In this case there are few things to do, from the project folder:
   * `make clean`
   * `make`
 
+These steps are necessary to be able to build or to test, where to test, still in the same folder, just write `polpetta` then press *ctrl* over the link in console or just go in [localhost](http://localhost:1337/) and you should see in your browser a green page.
+
+To test with node simply `make test` and you are ready to go.

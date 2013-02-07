@@ -1,5 +1,6 @@
 /*! (C) WebReflection - Mit Style License */
-define(function () {
+define(/*! (C) WebReflection - Mit Style License */
+function () {
   "use strict";
 
   var

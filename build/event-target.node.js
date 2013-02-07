@@ -1,5 +1,6 @@
 /*! (C) WebReflection - Mit Style License */
-module.exports = function () {
+module.exports = /*! (C) WebReflection - Mit Style License */
+function () {
   "use strict";
 
   var
