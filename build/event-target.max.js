@@ -1,6 +1,5 @@
 /*! (C) WebReflection - Mit Style License */
-var EventTarget =/*! (C) WebReflection - Mit Style License */
-function () {
+var EventTarget =function () {
   "use strict";
 
   var

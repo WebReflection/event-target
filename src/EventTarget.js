@@ -1,4 +1,3 @@
-/*! (C) WebReflection - Mit Style License */
 function () {
   "use strict";
 
