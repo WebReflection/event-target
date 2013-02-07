@@ -78,3 +78,11 @@ e.on("custom:event", doStuff)
 Well, it's mainly about enumerability. By default all listeners are not enumerable in ES5 and all of them configurable. This is a god way to go so no extra object is needed, the instance is the EventTarget itself indeed. In ES3, if a `for/in` loop is really needed/necessary over the EventTarget object, and bear in mind you've never probably done a `for/in` with a DOM node, as example, or an Event emitter, be sure that properties starting with the chosen prefix, right now `"@@"`, should not be modified.
 
 Same thing is valid for ES5 and `Object.getOwnPropertyNames(EventTarget)`, I believe it's a good practice to usually avoid dealing with anything that starts with `_` or `@` ... deal? Cool, now go and do amazing stuff :-)
+
+### If You Want To Build Or Test This Project
+In this case there are few things to do, from the project folder:
+
+  * `make dependencies`
+  * `make clean`
+  * `make`
+

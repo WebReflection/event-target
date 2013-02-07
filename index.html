@@ -1,35 +1,42 @@
 <!doctype html>
 <html>
     <head>
-        <title>wru</title>
-        <!-- https://github.com/WebReflection/wru -->
-        <script>function wru(wru){var assert=wru.assert,async=wru.async,log=wru.log;
-
-// enojy your tests!
-
-
-
-wru.test([
-    {
-        name: "it works!",
-        test: function () {
-            // sync
-            wru.assert(1);
-            
-            // async
-            setTimeout(async(function () { // wru.async
-                assert("called"); // wru.assert
-            }), 500);
-        }
-    }
-]);
-
-
-
+        <title>wru test</title>
+        <script>
+        // here the list of tests to run with wru
+        var TESTS = ['EventTarget'];
+        </script>
+        <script>// don't change code here
+        for(var i = 0; i < TESTS.length; ++i && document.write('<script src="build/event-target.max.js"><' + '/script>'));
+        function wru(wru){
+          var
+            all = [],
+            test = wru.test,
+            XHR = typeof XMLHttpRequest === typeof XHR ?
+              function () {
+                return new ActiveXObject("Microsoft.XMLHTTP");
+              } :
+              function () {
+                return new XMLHttpRequest;
+              }
+          ;
+          wru.test = function () {
+            all = all.concat.apply(all, arguments);
+          };
+          function load(file) {
+            var xhr = XHR();
+            xhr.open('get', file, false);
+            xhr.send(null);
+            Function("wru", xhr.responseText.
+              replace(/\/\/remove:[^\x00]*?\/\/:remove/g, '')
+            )(wru);
+          }
+          this.onload = function () {
+            for(var i = 0; i < TESTS.length; load('test/' + TESTS[i++] + '.js'));
+            wru.test = test;
+            wru.test(all);
+          };
         }</script>
-        
-        <!-- add other scripts here if necessary-->
-        
         <meta http-equiv="content-type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
         <style type="text/css">
