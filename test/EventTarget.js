@@ -6,6 +6,36 @@ wru.test([
   {
     name: "basic",
     test: function () {
+      function ET(){}
+      ET.prototype = EventTarget;
+
+      var et = new ET,
+          evt, fn;
+      et.addEventListener("init", fn = wru.async(function (e) {    
+        wru.assert("right target", e.target === et);
+        wru.assert("right event object", evt === e);
+        wru.assert("right context", this === et);
+        et.removeEventListener(e.type, fn);
+        et.dispatchEvent(evt = {type:"init"});
+        wru.assert("we are not in an infinite loop, right?", true);
+        et.addEventListener("handleEvent", evt = {handleEvent: fn = wru.async(function (e) {
+          wru.assert("right context", this === evt);
+          wru.assert("right target", e.target === et);
+          et.removeEventListener(e.type, this);
+          et.dispatchEvent(e);
+          wru.assert("we are not in an infinite loop, right?", true);
+        })});
+        et.dispatchEvent({type:"handleEvent"});
+      }));
+      et.dispatchEvent(evt = {type:"init"});
+      
+    }
+  },
+  {
+    name: "basic ES5",
+    test: function () {
+      // this test works in ES5 only browsers
+      if (!Object.defineProperty) return;
       function F(){}
       F.prototype = EventTarget;
       var et = new F,
