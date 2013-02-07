@@ -1,0 +1,8 @@
+src/*
+test/*
+template/*
+node_modules/*
+build/event-target.max.amd.js
+build/event-target.max.js
+Makefile
+test.html

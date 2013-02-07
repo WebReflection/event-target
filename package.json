@@ -1,0 +1,16 @@
+{
+  "version": "0.1.0",
+  "name": "event-target",
+  "description": "W3C EventTarget Interface / Mixin",
+  "homepage": "https://github.com/WebReflection/event-target",
+  "main": "./build/event-target.node.js",
+  "keywords": ["development", "web", "server", "terminal", "prototyping", "node"],
+  "author": {
+    "name": "Andrea Giammarchi",
+    "web": "http://webreflection.blogspot.com/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/WebReflection/event-target.git"
+  }
+}
