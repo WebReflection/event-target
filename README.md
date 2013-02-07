@@ -74,6 +74,13 @@ e.on("custom:event", doStuff)
 
 ```
 
+### Which EventTarget ?
+Here the list of files you might want to check :-)
+
+  * [for browsers](build/event-target.max.js), as global object, where you can find [the minified version here](build/event-target.js)
+  * [for RequireJS AMD define](build/event-target.max.amd.js), as generic dependencies free module, where you can find [the minified version here](build/event-target.amd.js)
+  * [for node.js](build/event-target.node.js) but you know you can simply `npm install event-target`, right?
+
 ### Difference Between ES3 And ES5
 Well, it's mainly about enumerability. By default all listeners are not enumerable in ES5 and all of them configurable. This is a god way to go so no extra object is needed, the instance is the EventTarget itself indeed. In ES3, if a `for/in` loop is really needed/necessary over the EventTarget object, and bear in mind you've never probably done a `for/in` with a DOM node, as example, or an Event emitter, be sure that properties starting with the chosen prefix, right now `"@@"`, should not be modified.
 
