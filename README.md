@@ -87,7 +87,11 @@ Well, it's mainly about enumerability. By default all listeners are not enumerab
 Same thing is valid for ES5 and `Object.getOwnPropertyNames(EventTarget)`, I believe it's a good practice to usually avoid dealing with anything that starts with `_` or `@` ... deal? Cool, now go and do amazing stuff :-)
 
 ### If You Want To Build Or Test This Project
-In this case there are few things to do, from the project folder:
+In this case there are few things to do. First install [WRU](https://github.com/WebReflection/wru)
+
+  * `npm install -g wru`
+
+Then, from the project folder:
 
   * `make dependencies`
   * `make clean`
