@@ -45,7 +45,11 @@ module.exports = function () {
   function dispatch(self, type, evt) {
     var array, current, i;
     if (has.call(self, type)) {
-      evt.target = self;
+      try {	      
+            evt.target = self;
+      } catch(e) {
+	    //An exception will occur in some browsers because evt.target is immutable
+      }
       array = self[type].slice(0);
       for (i = 0; i < array.length; i++) {
         current = array[i];
