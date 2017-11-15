@@ -1,0 +1,11 @@
+[
+  "check-es2015-constants",
+  "transform-es2015-arrow-functions",
+  "transform-es2015-block-scoped-functions",
+  "transform-es2015-block-scoping",
+  "transform-es2015-computed-properties",
+  "transform-es2015-destructuring",
+  "transform-es2015-duplicate-keys",
+  "transform-es2015-function-name",
+  "transform-es2015-shorthand-properties"
+]

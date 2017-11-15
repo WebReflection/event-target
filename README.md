@@ -1,98 +1,14 @@
-event-target
+event-target [![donate](https://img.shields.io/badge/$-donate-ff69b4.svg?maxAge=2592000&style=flat)](https://github.com/WebReflection/donate) [![License: ISC](https://img.shields.io/badge/License-ISC-yellow.svg)](https://opensource.org/licenses/ISC) [![Build Status](https://travis-ci.org/WebReflection/event-target.svg?branch=master)](https://travis-ci.org/WebReflection/event-target) [![Coverage Status](https://coveralls.io/repos/github/WebReflection/event-target/badge.svg?branch=master)](https://coveralls.io/github/WebReflection/event-target?branch=master)
 ============
 
-A [W3C EventTarget](http://www.w3.org/wiki/DOM/domcore/EventTarget) Interface usable directly as JavaScript mixin.
+The [EventTarget](https://dom.spec.whatwg.org/#interface-eventtarget) Class Polyfill.
 
-### What
-`EventTarget` is an object compatible with both ES3 and ES5 JS engines, suitable for old IE as latest version of node.js too.
+### How to use it:
 
-The interface has 3 methods, so does `EventTarget`
+  * via **CDN**, as global variable: `https://unpkg.com/event-target@latest/min.js`
+  * via **ESM**, as external module: `https://unpkg.com/event-target@latest/esm/main.js`
+  * via **CJS**: `const EventTarget = require('event-target').default;`
 
-  * `addEventListener(type:string, listener:function|object[, capture:boolean]):void` to add/subscribe a generic event listener, if not present already
-  * `removeEventListener(type:string, listener:function|object[, capture:boolean]):void` to remove/unsubscribe a generic event listener, if already present
-  * `dispatchEvent(event:object):void` to dispatch/notify all listeners
+### Compatibility:
 
-### How
-The very first thing to understand is that `EventTarget` is an interface, a concept in JavaScript represented by objects, rather than constructors.
-In fact, **EventTarget is not a function**, so any attempt to `new EventTarget` will fail.
-
-```JavaScript
-// retrieve the interface
-var EventTarget = require('event-target');
-
-// use it as mixin!
-function MyNode() {}
-MyNode.prototype.addEventListener = EventTarget.addEventListener;
-MyNode.prototype.removeEventListener = EventTarget.removeEventListener;
-MyNode.prototype.dispatchEvent = EventTarget.dispatchEvent;
-
-var el = new MyNode;
-el.addEventListener("test", function(evt){
-  console.log("it works!");
-});
-el.dispatchEvent({type:"test"});
-```
-
-That's pretty much it :-)
-
-Any object or prototype you want could use `EventTarget` methods, there's no need to initialize a thing, cool? What else could we do ? Well, we could, as example, simply borrow those methods when needed.
-
-```JavaScript
-var Emitter = (function(){
-
-  var EventTarget = require('event-target'),
-      addEventListener = EventTarget.addEventListener,
-      removeEventListener = EventTarget.removeEventListener,
-      dispatchEvent = EventTarget.dispatchEvent;
-
-  function Emitter(){}
-  
-  Emitter.prototype = {
-    on: function on(eventName, callMe) {
-      addEventListener.call(this, eventName, callMe);
-      return this;
-    },
-    off: function off(eventName, dontCallMe) {
-      removeEventListener.call(this, eventName, dontCallMe);
-      return this;
-    },
-    emit: function emit(eventName) {
-      dispatchEvent.call(this, eventName);
-      return this;
-    }
-  };
-
-  return Emitter;
-
-}());
-
-var e = new Emitter;
-e.on("custom:event", doStuff)
- .on("click", doExtraStuff)
- .off("whatever", dontBother)
- .emit("custom:event");
-
-```
-
-### Which EventTarget ?
-Here the list of files you might want to check :-)
-
-  * [for browsers](build/event-target.max.js), as global object, where you can find [the minified version here](build/event-target.js)
-  * [for RequireJS AMD define](build/event-target.max.amd.js), as generic dependencies free module, where you can find [the minified version here](build/event-target.amd.js)
-  * [for node.js](build/event-target.node.js) but you know you can simply `npm install event-target`, right?
-
-### Difference Between ES3 And ES5
-Well, it's mainly about enumerability. By default all listeners are not enumerable in ES5 and all of them configurable. This is a god way to go so no extra object is needed, the instance is the EventTarget itself indeed. In ES3, if a `for/in` loop is really needed/necessary over the EventTarget object, and bear in mind you've never probably done a `for/in` with a DOM node, as example, or an Event emitter, be sure that properties starting with the chosen prefix, right now `"@@"`, should not be modified.
-
-Same thing is valid for ES5 and `Object.getOwnPropertyNames(EventTarget)`, I believe it's a good practice to usually avoid dealing with anything that starts with `_` or `@` ... deal? Cool, now go and do amazing stuff :-)
-
-### If You Want To Build Or Test This Project
-In this case there are few things to do, from the project folder:
-
-  * `make dependencies`
-  * `make clean`
-  * `make`
-
-These steps are necessary to be able to build or to test, where to test, still in the same folder, just write `polpetta` then press *ctrl* over the link in console or just go in [localhost](http://localhost:1337/) and you should see in your browser a green page.
-
-To test with node simply `make test` and you are ready to go.
+Every. JavaScript. Engine.
