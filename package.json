@@ -1,5 +1,5 @@
 {
-  "version": "0.1.0",
+  "version": "1.0.0",
   "name": "event-target",
   "description": "The EventTarget Class Polyfill",
   "homepage": "https://github.com/WebReflection/event-target",
