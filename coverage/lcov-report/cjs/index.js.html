@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>Code coverage report for cjs/main.js</title>
+    <title>Code coverage report for cjs/index.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../prettify.css" />
     <link rel="stylesheet" href="../base.css" />
@@ -16,28 +16,28 @@
 <div class='wrapper'>
   <div class='pad1'>
     <h1>
-      <a href="../index.html">all files</a> / <a href="index.html">cjs/</a> main.js
+      <a href="../index.html">all files</a> / <a href="index.html">cjs/</a> index.js
     </h1>
     <div class='clearfix'>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Statements</span>
-        <span class='fraction'>47/47</span>
+        <span class='fraction'>51/51</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Branches</span>
-        <span class='fraction'>20/20</span>
+        <span class='fraction'>18/18</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Functions</span>
-        <span class='fraction'>8/8</span>
+        <span class='fraction'>7/7</span>
       </div>
       <div class='fl pad1y space-right2'>
         <span class="strong">100% </span>
         <span class="quiet">Lines</span>
-        <span class='fraction'>45/45</span>
+        <span class='fraction'>49/49</span>
       </div>
     </div>
   </div>
@@ -146,23 +146,22 @@
 101
 102
 103
-104</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
+104
+105
+106
+107
+108
+109
+110
+111</td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1×</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
@@ -187,6 +186,19 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">3×</span>
 <span class="cline-any cline-yes">2×</span>
@@ -242,123 +254,132 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1×</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2×</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">'use strict';
-const {findIndex, WeakMap} = require('./poorlyfills.js');
+const {defineProperty, findIndex, G, WeakMap} = require('./poorlyfills.js');
 &nbsp;
-Object.defineProperty(exports, '__esModule', {value: true}).default = global.EventTarget || (() =&gt; {
+let EventTarget = G.EventTarget;
 &nbsp;
-  // no need to transpile here, it's a very simple class
-  function EventTarget() {}
+try {
+  new EventTarget;
+} catch(e) {
+  EventTarget = (() =&gt; {
 &nbsp;
-  // EventTarget "class" definition
-  define(
-    EventTarget.prototype,
-    {
-      addEventListener,
-      dispatchEvent,
-      removeEventListener
+    // used to relate instances to listeners
+    const wm = new WeakMap;
+&nbsp;
+    // get listeners or relate them once to the instance
+    const get = self =&gt; wm.get(self) || set(self);
+    const set = self =&gt; {
+      const dictionary = new Null;
+      wm.set(self, dictionary);
+      return dictionary;
+    };
+&nbsp;
+    // define values as configurable
+    const define = (where, what) =&gt; {
+      for (const key in what) {
+        defineProperty(where, key, {
+          configurable: true,
+          value: what[key]
+        });
+      }
+    };
+&nbsp;
+    // no need to transpile here, it's a very simple class
+    function EventTarget() {}
+&nbsp;
+    // EventTarget "class" definition
+    define(
+      EventTarget.prototype,
+      {
+        addEventListener,
+        dispatchEvent,
+        removeEventListener
+      }
+    );
+&nbsp;
+    // dispatch event for each listener
+    function dispatch(info) {
+      const options = info.options;
+      if (options &amp;&amp; options.once) {
+        removeEventListener.call(
+          info.target,
+          this.type, info.listener, info.options
+        );
+      }
+      if (typeof info.listener === 'function') {
+        info.listener.call(info.target, this);
+      } else {
+        info.listener.handleEvent(this);
+      }
     }
-  );
 &nbsp;
-  // used to relate instances to listeners
-  const wm = new WeakMap;
-&nbsp;
-  // get listeners or relate them once to the instance
-  const get = self =&gt; wm.get(self) || set(self);
-  const set = self =&gt; {
-    const dictionary = new Null;
-    wm.set(self, dictionary);
-    return dictionary;
-  };
-&nbsp;
-  // define values as configurable
-  function define(where, what) {
-    for (const key in what) {
-      Object.defineProperty(where, key, {
-        configurable: true,
-        value: what[key]
-      });
+    // search for a registered listener
+    function registered(info) {
+      return this === info.listener;
     }
-  };
 &nbsp;
-  // dispatch event for each listener
-  function dispatch(info) {
-    const options = info.options;
-    if (options &amp;&amp; options.once) {
-      removeEventListener.call(
-        info.target,
-        this.type, info.listener, info.options
-      );
+    // public methods
+    function addEventListener(type, listener, options) {
+      const secret = get(this);
+      const listeners = secret[type] || (secret[type] = []);
+      if (findIndex.call(listeners, registered, listener) &lt; 0) {
+        listeners.push({target: this, listener, options});
+      }
     }
-    if (typeof info.listener === 'function') {
-      info.listener.call(info.target, this);
-    } else {
-      info.listener.handleEvent(this);
+&nbsp;
+    function dispatchEvent(event) {
+      const secret = get(this);
+      const listeners = secret[event.type];
+      if (listeners) {
+        define(event, {
+          currentTarget: this,
+          target: this
+        });
+        listeners.forEach(dispatch, event);
+        delete event.currentTarget;
+        delete event.target;
+      }
+      return true;
     }
-  }
 &nbsp;
-  // search for a registered listener
-  function registered(info) {
-    return this === info.listener;
-  }
-&nbsp;
-  // public methods
-  function addEventListener(type, listener, options) {
-    const secret = get(this);
-    const listeners = secret[type] || (secret[type] = []);
-    if (findIndex.call(listeners, registered, listener) &lt; 0) {
-      listeners.push({target: this, listener, options});
+    // used both as public and private method,
+    // to avoid method pollution/interception of private listeners
+    function removeEventListener(type, listener, options) {
+      const secret = get(this);
+      const listeners = secret[type];
+      if (listeners) {
+        const i = findIndex.call(listeners, registered, listener);
+        if (-1 &lt; i) listeners.splice(i, 1);
+      }
     }
-  }
 &nbsp;
-  function dispatchEvent(event) {
-    const secret = get(this);
-    const listeners = secret[event.type];
-    if (listeners) {
-      define(event, {
-        currentTarget: this,
-        target: this
-      });
-      listeners.forEach(dispatch, event);
-      delete event.currentTarget;
-      delete event.target;
-    }
-    return true;
-  }
+    // private "class"
+    function Null() {}
+    Null.prototype = Object.create(null);
 &nbsp;
-  // used both as public and private method,
-  // to avoid method pollution/interception of private listeners
-  function removeEventListener(type, listener, options) {
-    const secret = get(this);
-    const listeners = secret[type];
-    if (listeners) {
-      const i = findIndex.call(listeners, registered, listener);
-      if (-1 &lt; i) listeners.splice(i, 1);
-    }
-  }
+    return EventTarget;
 &nbsp;
+  })();
+}
 &nbsp;
-  // private "class"
-  function Null() {}
-  Null.prototype = Object.create(null);
-&nbsp;
-  return EventTarget;
-&nbsp;
-})();
+Object.defineProperty(exports, '__esModule', {value: true}).default = EventTarget;
 &nbsp;</pre></td></tr>
 </table></pre>
 <div class='push'></div><!-- for sticky footer -->
 </div><!-- /wrapper -->
 <div class='footer quiet pad2 space-top1 center small'>
   Code coverage
-  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Nov 15 2017 16:03:12 GMT-0300 (-03)
+  generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Wed Nov 29 2017 09:45:22 GMT-0300 (-03)
 </div>
 </div>
 <script src="../prettify.js"></script>

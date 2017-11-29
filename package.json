@@ -3,16 +3,18 @@
   "name": "event-target",
   "description": "The EventTarget Class Polyfill",
   "homepage": "https://github.com/WebReflection/event-target",
-  "main": "./cjs/main.js",
-  "module": "./esm/main.js",
+  "main": "./cjs/index.js",
+  "module": "./esm/index.js",
   "scripts": {
-    "bundle": "echo '/*! (c) 2017 Andrea Giammarchi (ISC) */ var EventTarget = ' > index.js && asbundle esm/main.js | babel --plugins=$(node -e 'console.log(require(\"./babel-plugins.json\").join(\",\"))') >> index.js",
+    "bundle": "rollup --config rollup.config.js && npm run cleanup",
+    "bundles": "echo '/*! (c) 2017 Andrea Giammarchi (ISC) */ var EventTarget = ' > index.js && asbundle esm/index.js | babel --plugins=$(node -e 'console.log(require(\"./babel-plugins.json\").join(\",\"))') >> index.js",
     "build": "npm run cjs && npm run bundle && npm run min && npm test && npm run size",
+    "cleanup": "echo \"/*! (c) 2017 Andrea Giammarchi (ISC) */\n$(cat index.js | sed 's/}({}));/}());/' | sed 's/(exports)/()/' | sed 's/var EventTarget$1 = EventTarget;//' | sed 's/return exports;/return EventTarget;/' | sed -e 's/exports.*;//')\" > index.js",
     "cjs": "ascjs ./esm ./cjs",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "min": "uglifyjs index.js --support-ie8 --comments=/^!/ -c -m -o min.js",
     "size": "cat index.js | wc -c;cat min.js | wc -c;gzip -c min.js | wc -c",
-    "test": "istanbul cover test/main.js"
+    "test": "istanbul cover test/index.js"
   },
   "keywords": [
     "EventTarget",
@@ -21,7 +23,6 @@
   ],
   "author": "Andrea Giammarchi",
   "devDependencies": {
-    "asbundle": "^2.4.0",
     "ascjs": "^2.4.0",
     "babel-cli": "^6.26.0",
     "babel-plugin-check-es2015-constants": "^6.22.0",
@@ -37,6 +38,8 @@
     "basichtml": "^0.10.5",
     "coveralls": "^2.13.1",
     "istanbul": "^0.4.5",
+    "rollup": "^0.52.0",
+    "rollup-plugin-babel": "^3.0.2",
     "tressa": "^0.3.1",
     "uglify-js": "^2.8.29"
   },

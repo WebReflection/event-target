@@ -1,38 +1,40 @@
-/*! (c) 2017 Andrea Giammarchi (ISC) */ var EventTarget = 
-(function (cache, modules) {
-  function require(i) {
-    return cache[i] || get(i);
-  }
-  function get(i) {
-    var exports = {},
-        module = { exports: exports };
-    modules[i].call(exports, window, require, module, exports);
-    return cache[i] = module.exports;
-  }
-  require.E = function (exports) {
-    return Object.defineProperty(exports, '__esModule', { value: true });
+/*! (c) 2017 Andrea Giammarchi (ISC) */
+var EventTarget = (function () {
+'use strict';
+
+var UID = '__event-target__' + Math.random();
+
+var G = typeof global === typeof null ? global : window;
+
+var defineProperty = Object.defineProperty;
+
+var findIndex = [].findIndex || function (callback, context) {
+  var i = this.length;
+  while (i--) {
+    if (callback.call(context, this[i])) return i;
+  }return i;
+};
+
+var WeakMap = G.WeakMap || function WeakMap() {
+  return {
+    get: function get(obj) {
+      return obj[UID];
+    },
+    set: function set(obj, value) {
+      defineProperty(obj, UID, {
+        configurable: true,
+        value: value
+      });
+    }
   };
-  var main = require(0);
-  return main.__esModule ? main.default : main;
-})([], [function (global, require, module, exports) {
-  // main.js
-  'use strict';
+};
 
-  var _require = require(1),
-      findIndex = _require.findIndex,
-      WeakMap = _require.WeakMap;
+var EventTarget = G.EventTarget;
 
-  require.E(exports).default = global.EventTarget || function () {
-
-    // no need to transpile here, it's a very simple class
-    function EventTarget() {}
-
-    // EventTarget "class" definition
-    define(EventTarget.prototype, {
-      addEventListener: addEventListener,
-      dispatchEvent: dispatchEvent,
-      removeEventListener: removeEventListener
-    });
+try {
+  new EventTarget();
+} catch (e) {
+  EventTarget = function () {
 
     // used to relate instances to listeners
     var wm = new WeakMap();
@@ -48,14 +50,24 @@
     };
 
     // define values as configurable
-    function define(where, what) {
+    var define = function define(where, what) {
       for (var key in what) {
-        Object.defineProperty(where, key, {
+        defineProperty(where, key, {
           configurable: true,
           value: what[key]
         });
       }
     };
+
+    // no need to transpile here, it's a very simple class
+    function EventTarget() {}
+
+    // EventTarget "class" definition
+    define(EventTarget.prototype, {
+      addEventListener: addEventListener,
+      dispatchEvent: dispatchEvent,
+      removeEventListener: removeEventListener
+    });
 
     // dispatch event for each listener
     function dispatch(info) {
@@ -116,33 +128,12 @@
 
     return EventTarget;
   }();
-}, function (global, require, module, exports) {
-  // poorlyfills.js
-  'use strict';
+}
 
-  var UID = '__event-target__' + Math.random();
 
-  var findIndex = [].findIndex || function (callback, context) {
-    var i = this.length;
-    while (i--) {
-      if (callback.call(context, this[i])) return i;
-    }return i;
-  };
-  exports.findIndex = findIndex;
 
-  var WeakMap = global.WeakMap || function WeakMap() {
-    return {
-      get: function get(obj) {
-        return obj[UID];
-      },
-      set: function set(obj, value) {
-        Object.defineProperty(obj, UID, {
-          configurable: true,
-          value: value
-        });
-      }
-    };
-  };
-  exports.WeakMap = WeakMap;
-}]);
 
+
+return EventTarget;
+
+}());

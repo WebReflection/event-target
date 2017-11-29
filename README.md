@@ -6,8 +6,9 @@ The [EventTarget](https://dom.spec.whatwg.org/#interface-eventtarget) Class Poly
 ### How to use it:
 
   * via **CDN**, as global variable: `https://unpkg.com/event-target@latest/min.js`
-  * via **ESM**, as external module: `https://unpkg.com/event-target@latest/esm/main.js`
+  * via **ESM**, as external module: `https://unpkg.com/event-target@latest/esm/index.js`
   * via **CJS**: `const EventTarget = require('event-target').default;`
+  * via bundlers/transpilers: `import EventTarget from 'event-target';` <sup><sub>( or `from 'event-target/esm'` )</sub></sup>
 
 ### Compatibility:
 
