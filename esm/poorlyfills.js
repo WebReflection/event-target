@@ -1,6 +1,6 @@
 const UID = '__event-target__' + Math.random();
 
-export const G = typeof global === typeof null ? global : window;
+export const G = typeof global === typeof null ? global : self;
 
 export const defineProperty = Object.defineProperty;
 
