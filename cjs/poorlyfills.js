@@ -1,7 +1,7 @@
 'use strict';
 const UID = '__event-target__' + Math.random();
 
-const G = typeof global === typeof null ? global : window;
+const G = typeof global === typeof null ? global : self;
 exports.G = G;
 
 const defineProperty = Object.defineProperty;

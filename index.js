@@ -4,7 +4,7 @@ var EventTarget = (function () {
 
 var UID = '__event-target__' + Math.random();
 
-var G = typeof global === typeof null ? global : window;
+var G = typeof global === typeof null ? global : self;
 
 var defineProperty = Object.defineProperty;
 
