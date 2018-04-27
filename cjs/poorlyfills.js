@@ -12,14 +12,15 @@ exports.findIndex = findIndex;
 const defineProperty = Object.defineProperty;
 exports.defineProperty = defineProperty;
 
-let i = 0;
+// even if not unique each time, the used WeakMap
+// is one and one only so it's not required to grant
+// uniqueness per each instance. This is enough.
 const UID = '__event-target__' + Math.random();
 const WeakMap = G.WeakMap || function WeakMap() {
-  const UUID = UID + i++;
   return {
-    get(obj) { return obj[UUID]; },
+    get(obj) { return obj[UID]; },
     set(obj, value) {
-      defineProperty(obj, UUID, {
+      defineProperty(obj, UID, {
         configurable: true,
         value
       });
