@@ -2,11 +2,7 @@
 var EventTarget = (function () {
 'use strict';
 
-var UID = '__event-target__' + Math.random();
-
 var G = typeof global === typeof null ? global : self;
-
-var defineProperty = Object.defineProperty;
 
 var findIndex = [].findIndex || function (callback, context) {
   var i = this.length;
@@ -15,13 +11,18 @@ var findIndex = [].findIndex || function (callback, context) {
   }return i;
 };
 
+var defineProperty = Object.defineProperty;
+
+var i = 0;
+var UID = '__event-target__' + Math.random();
 var WeakMap = G.WeakMap || function WeakMap() {
+  var UUID = UID + i++;
   return {
     get: function get(obj) {
-      return obj[UID];
+      return obj[UUID];
     },
     set: function set(obj, value) {
-      defineProperty(obj, UID, {
+      defineProperty(obj, UUID, {
         configurable: true,
         value: value
       });
